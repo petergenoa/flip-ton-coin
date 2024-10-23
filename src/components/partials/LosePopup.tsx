@@ -5,7 +5,7 @@ import AmountBackground from '../../assets/images/popups/amount-background.png';
 import TonImage from '../../assets/images/popups/small-ton-side.png';
 import Fireworks from "react-canvas-confetti/dist/presets/snow";
 import LostSound from "../../assets/sounds/lost.wav";
-import ButtonSound from "../../assets/sounds/button.wav";
+import ButtonSound from "../../assets/sounds/button.m4a";
 import Header from '../Header';
 
 interface LosePopupProps {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./styles/pickSide.css";
-import ButtonSound from "../assets/sounds/button.wav";
+import ButtonSound from "../assets/sounds/button.m4a";
 
 interface PickSideProps {
     setSelectedSide: (side: string) => void;

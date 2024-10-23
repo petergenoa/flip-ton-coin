@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './styles/messagePopup.css';
 import CancelButton from '../../assets/images/popups/cancel-button.png';
-import ButtonSound from "../../assets/sounds/button.wav";
+import ButtonSound from "../../assets/sounds/button.m4a";
 import Header from '../Header';
 
 interface MessagePopupProps {

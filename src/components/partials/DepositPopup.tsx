@@ -4,7 +4,7 @@ import ButtonBackground from '../../assets/images/popups/button-background.png';
 import AmountBackground from '../../assets/images/popups/amount-background.png';
 import TonImage from '../../assets/images/popups/small-ton-side.png';
 import CancelImage from '../../assets/images/popups/cancel-button.png';
-import ButtonSound from "../../assets/sounds/button.wav";
+import ButtonSound from "../../assets/sounds/button.m4a";
 import Header from '../Header';
 
 interface DepositPopupProps {

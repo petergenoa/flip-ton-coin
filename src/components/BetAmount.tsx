@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import TonImage from '../assets/images/small-ton.png';
 import "./styles/betAmount.css";
-import ButtonSound from "../assets/sounds/button.wav";
+import ButtonSound from "../assets/sounds/button.m4a";
 
 interface BetAmountProps {
     setBetAmount: (amount: number) => void;

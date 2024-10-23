@@ -11,7 +11,7 @@ import PickSide from "./components/PickSide";
 import { useState } from "react";
 import WinPopup from "./components/partials/WinPopup";
 import LosePopup from "./components/partials/LosePopup";
-import ButtonSound from "./assets/sounds/button.wav";
+import ButtonSound from "./assets/sounds/button.m4a";
 import MessagePopup from "./components/partials/MessagePopup";
 
 declare global {
@@ -19,6 +19,7 @@ declare global {
       Telegram:any;
   }
 }
+
 
 function App() {
   const { network } = useTonConnect();
