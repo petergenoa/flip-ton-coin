@@ -13,6 +13,7 @@ const Header: React.FC<HeaderProps> = ({ amount, username }) => {
     const [isDepositPopupVisible, setIsDepositPopupVisible] = useState(false);
     
     const depositClicked = () => {
+        window.Telegram.WebApp.HapticFeedback.impactOccurred("heavy");
         setIsDepositPopupVisible(true);
     }
 

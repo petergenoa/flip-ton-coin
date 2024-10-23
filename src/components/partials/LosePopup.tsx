@@ -24,12 +24,14 @@ const LosePopup: React.FC<LosePopupProps> = ({ amount, username, onClose, onRetr
   const playSound = () => {
     const audio = new Audio(ButtonSound);
     audio.play();
+    window.Telegram.WebApp.HapticFeedback.impactOccurred("heavy");
     onRetry();
   }
 
   const playSoundClose = () => {
     const audio = new Audio(ButtonSound);
     audio.play();
+    window.Telegram.WebApp.HapticFeedback.impactOccurred("heavy");
     onClose();
   }
 

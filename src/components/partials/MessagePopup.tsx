@@ -15,6 +15,7 @@ const MessagePopup: React.FC<MessagePopupProps> = ({ username, amount, onClose, 
   const playSoundClose = () => {
     const audio = new Audio(ButtonSound);
     audio.play();
+    window.Telegram.WebApp.HapticFeedback.impactOccurred("heavy");
     onClose();
   }
 

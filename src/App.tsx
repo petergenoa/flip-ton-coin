@@ -14,6 +14,12 @@ import LosePopup from "./components/partials/LosePopup";
 import ButtonSound from "./assets/sounds/button.wav";
 import MessagePopup from "./components/partials/MessagePopup";
 
+declare global {
+  interface Window {
+      Telegram:any;
+  }
+}
+
 function App() {
   const { network } = useTonConnect();
   const [username, setUsername] = useState('username12');
@@ -31,6 +37,7 @@ function App() {
   
   const handleFlip = () => {
     playSound();
+    window.Telegram.WebApp.HapticFeedback.impactOccurred("heavy");
     if (!betAmount || !selectedSide) {
       setIsMessagePopupVisible(true);
       return;
@@ -56,7 +63,7 @@ function App() {
 
       // Show the popup after the "draw animation"
       setIsPopupVisible(true);
-    }, 500);
+    }, 1500);
   };
 
   return (

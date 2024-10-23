@@ -25,12 +25,14 @@ const WinPopup: React.FC<WinPopupProps> = ({ username, amount, winAmount, onClos
   const playSound = () => {
     const audio = new Audio(ButtonSound);
     audio.play();
+    window.Telegram.WebApp.HapticFeedback.impactOccurred("heavy");
     onRetry();
   }
 
   const playSoundClose = () => {
     const audio = new Audio(ButtonSound);
     audio.play();
+    window.Telegram.WebApp.HapticFeedback.impactOccurred("heavy");
     onClose();
   }
   

@@ -15,15 +15,17 @@ const PickSide: React.FC<PickSideProps> = ({ setSelectedSide }) => {
     }
 
     const handleTonClick = () => {
+        playSound();
+        window.Telegram.WebApp.HapticFeedback.impactOccurred("heavy");
         setLocalSelectedSide('TON');
         setSelectedSide('TON');
-        playSound();
     };
     
     const handleUtyaClick = () => {
+        playSound();
+        window.Telegram.WebApp.HapticFeedback.impactOccurred("heavy");
         setLocalSelectedSide('UTYA');
         setSelectedSide('UTYA');
-        playSound();
     };
 
     return(

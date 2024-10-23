@@ -16,9 +16,10 @@ const BetAmount: React.FC<BetAmountProps> = ({ setBetAmount }) => {
     }
 
     const handleSelectItem = (amount: number) => {
+        playSound();
+        window.Telegram.WebApp.HapticFeedback.impactOccurred("heavy");
         setSelectedItem(amount);
         setBetAmount(amount);
-        playSound();
     };
 
     return (

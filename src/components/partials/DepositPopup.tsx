@@ -18,10 +18,11 @@ const DepositPopup: React.FC<DepositPopupProps> = ({ amount, username, onClose }
   const playSoundClose = () => {
     const audio = new Audio(ButtonSound);
     audio.play();
+    window.Telegram.WebApp.HapticFeedback.impactOccurred("heavy");
     onClose();
   }
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let val = e.target.value;
 
     // Remove non-numeric characters, except for decimal point
