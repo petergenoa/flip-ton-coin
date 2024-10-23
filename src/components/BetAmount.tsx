@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TonImage from '../assets/images/small-ton.png';
 import "./styles/betAmount.css";
 import ButtonSound from "../assets/sounds/button.m4a";
@@ -9,9 +9,16 @@ interface BetAmountProps {
 
 const BetAmount: React.FC<BetAmountProps> = ({ setBetAmount }) => {
     const [selectedItem, setSelectedItem] = useState<number>(0);
+    let audio = new Audio(ButtonSound);
+
+    useEffect(() => {
+        // Preload the audio when the component mounts
+        audio.preload = 'auto';
+        audio.load();
+    }, []);
 
     const playSound = () => {
-        const audio = new Audio(ButtonSound);
+        audio.currentTime = 0;
         audio.play();
     }
 

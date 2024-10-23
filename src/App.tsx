@@ -72,7 +72,7 @@ function App() {
 
       // Show the popup after the "draw animation"
       setIsPopupVisible(true);
-    }, 1500);
+    }, 500);
   };
 
   return (
