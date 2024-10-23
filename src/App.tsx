@@ -76,13 +76,13 @@ function App() {
       </div>
 
       {isPopupVisible && isWin === true && (
-        <WinPopup winAmount={betAmount} onClose={() => setIsPopupVisible(false)} onRetry={() => handleFlip()} />
+        <WinPopup amount={balance} username={username} winAmount={betAmount} onClose={() => setIsPopupVisible(false)} onRetry={() => handleFlip()} />
       )}
       {isPopupVisible && isWin === false && (
-        <LosePopup onClose={() => setIsPopupVisible(false)} onRetry={() => handleFlip()} />
+        <LosePopup amount={balance} username={username} onClose={() => setIsPopupVisible(false)} onRetry={() => handleFlip()} />
       )}
       {isMessagePopupVisible &&
-        <MessagePopup message={"Please select a bet amount and a side (TON or UTYA)!"} onClose={() => setIsMessagePopupVisible(false)} />
+        <MessagePopup amount={balance} username={username} message={"Please select a bet amount and a side (TON or UTYA)!"} onClose={() => setIsMessagePopupVisible(false)} />
       }
     </div>
   );

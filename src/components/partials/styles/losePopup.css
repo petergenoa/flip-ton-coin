@@ -32,6 +32,13 @@
   left: 26px;
 }
 
+.lose-header {
+  position: absolute;
+  top: 0;
+  gap: 10px;
+  width: 100%;
+}
+
 .lose-content {
   position: relative;
   display: flex;

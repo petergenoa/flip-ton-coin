@@ -32,6 +32,13 @@
   left: 26px;
 }
 
+.popup-header {
+  position: absolute;
+  top: 0;
+  gap: 10px;
+  width: 100%;
+}
+
 .content {
   position: relative;
   display: flex;

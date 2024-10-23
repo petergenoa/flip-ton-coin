@@ -9,12 +9,14 @@ import ButtonSound from "../../assets/sounds/button.wav";
 import Header from '../Header';
 
 interface WinPopupProps {
+  username: string;
+  amount: number;
   winAmount: number | null;
   onClose: () => void;
   onRetry: () => void;
 }
 
-const WinPopup: React.FC<WinPopupProps> = ({ winAmount, onClose, onRetry }) => {
+const WinPopup: React.FC<WinPopupProps> = ({ username, amount, winAmount, onClose, onRetry }) => {
   useEffect(() => {
     const audio = new Audio(WinSound);
     audio.play();
@@ -35,6 +37,9 @@ const WinPopup: React.FC<WinPopupProps> = ({ winAmount, onClose, onRetry }) => {
   return (
     <div className="overlay">
       <Fireworks autorun={{ speed: 5, duration: 1800 }} />
+      <div className='popup-header'>
+        <Header username={username} amount={amount} />
+      </div>
       <div className="popup">
           <div className='popup-head'></div>
           <div className="content">

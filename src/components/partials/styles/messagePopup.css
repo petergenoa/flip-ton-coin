@@ -39,6 +39,13 @@
     justify-content: center;
   }
   
+  .message-header {
+    position: absolute;
+    top: 0;
+    gap: 10px;
+    width: 100%;
+  }
+
   .message-content {
     position: relative;    
     display: block;

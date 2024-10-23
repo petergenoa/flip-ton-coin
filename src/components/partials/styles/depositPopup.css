@@ -1,0 +1,140 @@
+.deposit-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #62008c;
+    background-image: url("../../../assets/images/background.png");
+    background-position: center;
+    z-index: 1000;
+  }
+
+  .deposit-header {
+    position: absolute;
+    top: 0;
+    gap: 10px;
+    width: 100%;
+  }
+  
+  .deposit-popup {
+    position: relative;
+    width: 300px;
+    height: 162px;
+    background-image: url("../../../assets/images/popups/background.png");
+    background-size: cover;
+    z-index: 2;
+  }
+  
+  .deposit-popup-head {
+    background-image: url("../../../assets/images/popups/button-background.png");
+    background-size: cover;
+    width: 200px;
+    height: 60px;
+    position: absolute;
+    top: 0px;
+    left: 52px;
+    font-size: 16px;
+    font-family: "Hobeaux Bold", sans-serif;
+    letter-spacing: 0.5px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+  }
+
+  .deposit-cancel {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    position: absolute;
+    right: -20px;
+    top: 10px;
+  }
+
+  .deposit-cancel:active {
+    transform: translateY(2px);
+  }
+  
+  .deposit-content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin-top: 20px;
+  }
+  
+  .deposit-content img {
+    width: 130px;
+    height: 40px;
+    object-fit: cover;
+  }
+  
+  .deposit-content .deposit-amount {
+    position: absolute;
+    font-size: 18px;
+    font-family: "Hobeaux Bold", sans-serif;
+    letter-spacing: 0px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .deposit-content .deposit-amount input {
+    background-color: transparent;
+    max-width: 60px;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    font-family: "Hobeaux Bold", sans-serif;
+    letter-spacing: 0px;
+    color: #fff;
+  }
+  
+  .deposit-content .deposit-amount img {
+    width: 21px;
+    height: 20px;
+  }
+  
+  .deposit-buttons {
+    position: absolute;
+    bottom: -30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    left: 3px;
+  }
+  
+  .deposit-buttons .deposit-popup-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .deposit-buttons .deposit-popup-button:active {
+    transform: translateY(2px);
+  }
+  
+  .deposit-buttons .deposit-button-title {
+    position: absolute;
+    font-size: 24px;
+    font-family: "Hobeaux Bold", sans-serif;
+    letter-spacing: 0px;
+    color: #FEDF61;
+  }
+  
+  .deposit-buttons .deposit-popup-button img {
+    width: 132px;
+    height: 50px;
+    object-fit: cover;
+  }

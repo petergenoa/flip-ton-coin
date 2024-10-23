@@ -1,15 +1,17 @@
 import React, { useEffect } from 'react';
 import './styles/messagePopup.css';
-import ButtonBackground from '../../assets/images/popups/button-background.png';
-import OkButton from '../../assets/images/popups/ok-button.png';
+import CancelButton from '../../assets/images/popups/cancel-button.png';
 import ButtonSound from "../../assets/sounds/button.wav";
+import Header from '../Header';
 
 interface MessagePopupProps {
-  onClose: () => void;
-  message: string;
+    username: string;
+    amount: number;
+    onClose: () => void;
+    message: string;
 }
 
-const MessagePopup: React.FC<MessagePopupProps> = ({ onClose, message }) => {
+const MessagePopup: React.FC<MessagePopupProps> = ({ username, amount, onClose, message }) => {
   const playSoundClose = () => {
     const audio = new Audio(ButtonSound);
     audio.play();
@@ -18,6 +20,9 @@ const MessagePopup: React.FC<MessagePopupProps> = ({ onClose, message }) => {
 
   return (
     <div className="message-overlay">
+        <div className='message-header'>
+            <Header username={username} amount={amount} />
+        </div>
       <div className="message-popup">
         <div className='message-popup-head'>MESSAGE</div>
           <div className="message-content">
@@ -25,7 +30,7 @@ const MessagePopup: React.FC<MessagePopupProps> = ({ onClose, message }) => {
           </div>
           <div className="message-buttons">
             <div className='message-popup-button' onClick={playSoundClose}>
-              <img src={OkButton} alt="" />
+              <img src={CancelButton} alt="" />
             </div>
           </div>
       </div>
