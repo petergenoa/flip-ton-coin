@@ -9,18 +9,30 @@ interface BetAmountProps {
 
 const BetAmount: React.FC<BetAmountProps> = ({ setBetAmount }) => {
     const [selectedItem, setSelectedItem] = useState<number>(0);
-    let audio = new Audio(ButtonSound);
+    
+    const [audioBuffer, setAudioBuffer] = useState<AudioBuffer | null>(null);
+      const [audioContext] = useState(() => new (window.AudioContext || window.webkitAudioContext)());
 
-    useEffect(() => {
-        // Preload the audio when the component mounts
-        audio.preload = 'auto';
-        audio.load();
-    }, []);
 
-    const playSound = () => {
-        audio.currentTime = 0;
-        audio.play();
-    }
+      useEffect(() => {
+        const fetchAudio = async () => {
+          const response = await fetch(ButtonSound);
+          const arrayBuffer = await response.arrayBuffer();
+          const decodedData = await audioContext.decodeAudioData(arrayBuffer);
+          setAudioBuffer(decodedData);
+        };
+    
+        fetchAudio();
+      }, [audioContext]);
+    
+      const playSound = () => {
+        if (audioBuffer) {
+          const source = audioContext.createBufferSource();
+          source.buffer = audioBuffer;
+          source.connect(audioContext.destination);
+          source.start(0);
+        }
+      };
 
     const handleSelectItem = (amount: number) => {
         playSound();

@@ -17,6 +17,7 @@ import MessagePopup from "./components/partials/MessagePopup";
 declare global {
   interface Window {
       Telegram:any;
+      webkitAudioContext: any;
   }
 }
 
@@ -45,7 +46,6 @@ function App() {
   }
   
   const handleFlip = () => {
-    playSound();
     window.Telegram.WebApp.HapticFeedback.impactOccurred("heavy");
     if (!betAmount || !selectedSide) {
       setIsMessagePopupVisible(true);
