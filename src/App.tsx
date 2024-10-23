@@ -29,6 +29,14 @@ function App() {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [isMessagePopupVisible, setIsMessagePopupVisible] = useState(false);
   const [isWin, setIsWin] = useState<boolean | null>(null);
+
+  if(window.Telegram) {
+    const tg = window.Telegram.WebApp;
+    if (tg) {
+      tg.enableClosingConfirmation();
+      tg.expand();
+    }
+  }
   
   const playSound = () => {
     const audio = new Audio(ButtonSound);

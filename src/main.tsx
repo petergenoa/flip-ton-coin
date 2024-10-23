@@ -11,6 +11,18 @@ const queryClient = new QueryClient({
   defaultOptions: { queries: { refetchOnWindowFocus: false } },
 });
 
+if (window.visualViewport) {
+  window.visualViewport.addEventListener('resize', () => {
+    if(window.visualViewport) {
+      document.body.style.height = window.visualViewport.height + 'px';
+    }
+  });
+}
+// This will ensure user never overscroll the page
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 0) window.scrollTo(0, 0);
+});
+
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <TonConnectUIProvider manifestUrl={manifestUrl}>
     <QueryClientProvider client={queryClient}>
