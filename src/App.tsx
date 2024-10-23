@@ -1,89 +1,89 @@
 import "./App.css";
 import { TonConnectButton } from "@tonconnect/ui-react";
-import { Counter } from "./components/Counter";
-import { Jetton } from "./components/Jetton";
-import { TransferTon } from "./components/TransferTon";
 import styled from "styled-components";
-import { Button, FlexBoxCol, FlexBoxRow } from "./components/styled/styled";
 import { useTonConnect } from "./hooks/useTonConnect";
 import { CHAIN } from "@tonconnect/protocol";
 import "@twa-dev/sdk";
-import TonImage from './assets/images/small-ton.png';
-import UtyaCoin from './assets/images/coin/utya.png';
-import TonCoin from './assets/images/coin/ton.png';
-
+import Header from "./components/Header";
+import BetAmount from "./components/BetAmount";
+import Coin from "./components/Coin";
+import PickSide from "./components/PickSide";
+import { useState } from "react";
+import WinPopup from "./components/partials/WinPopup";
+import LosePopup from "./components/partials/LosePopup";
+import ButtonSound from "./assets/sounds/button.wav";
+import MessagePopup from "./components/partials/MessagePopup";
 
 function App() {
   const { network } = useTonConnect();
+  const [username, setUsername] = useState('username12');
+  const [balance, setBalance] = useState<number>(100);
+  const [betAmount, setBetAmount] = useState<number>(0);
+  const [selectedSide, setSelectedSide] = useState<string | null>(null);
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
+  const [isMessagePopupVisible, setIsMessagePopupVisible] = useState(false);
+  const [isWin, setIsWin] = useState<boolean | null>(null);
+  
+  const playSound = () => {
+    const audio = new Audio(ButtonSound);
+    audio.play();
+  }
+  
+  const handleFlip = () => {
+    playSound();
+    if (!betAmount || !selectedSide) {
+      setIsMessagePopupVisible(true);
+      return;
+    }
+
+    // Close popup first to simulate draw animation
+    setIsPopupVisible(false);
+    // Simulate draw animation and delay
+    setTimeout(() => {
+      // Simulate coin flip (randomly select 'TON' or 'UTYA')
+      const result = Math.random() < 0.5 ? 'TON' : 'UTYA';
+      const userChoice = selectedSide === 'TON' ? 'TON' : 'UTYA';
+      
+      if (result === userChoice) {
+        // User wins
+        setIsWin(true);
+        setBalance(balance + betAmount);
+      } else {
+        // User loses
+        setIsWin(false);
+        setBalance(balance - betAmount);
+      }
+
+      // Show the popup after the "draw animation"
+      setIsPopupVisible(true);
+    }, 500);
+  };
 
   return (
     <div id="#root">
       <div className="App">
         <div className="Content">
-          <div className="header-row">
-            <div className="profile-name">
-              <div className="profile-username-text">Username</div>
-            </div>
-            <div className="deposit-field">
-              <div className="profile-deposit-text">
-                18
-              </div>
-              <div className="button-deposit"></div>
-            </div>
-          </div>
-
-          <div className="bet-row">
-            <div className="bet-title">BET AMOUNT</div>
-            <div className="bet-container">
-              <div className="bet-item">
-                <div className="bet-item-inner">
-                  <img src={TonImage} alt="" />
-                  <p>1 TON</p>
-                </div>
-              </div>
-              <div className="bet-item">
-                <div className="bet-item-inner">
-                  <img src={TonImage} alt="" />
-                  <p>2 TON</p>
-                </div>
-              </div>
-              <div className="bet-item">
-                <div className="bet-item-inner">
-                  <img src={TonImage} alt="" />
-                  <p>5 TON</p>
-                </div>
-              </div>
-              <div className="bet-item">
-                <div className="bet-item-inner">
-                  <img src={TonImage} alt="" />
-                  <p>10 TON</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="coin-container">
-            <div className="coin">
-              <div className="coin-face front">
-                <img src={UtyaCoin} alt="UtyaCoin" />
-              </div>
-              <div className="coin-face back">
-                <img src={TonCoin} alt="TonCoin" />
-              </div>
-            </div>
-          </div>
-
-          <div className="pick-side-button">
-            <div className="pick-side-ton">TON</div>
-            <div className="pick-side-utya">UTYA</div>
-          </div>
+          <Header amount={balance} username={username} />
+          <BetAmount setBetAmount={setBetAmount} />
+          <Coin />
+          <PickSide setSelectedSide={setSelectedSide} />
 
           <div className="bet-button-container">
-            <div className="bet-button">FLIP</div>
+            <div className="bet-button" onClick={handleFlip}>FLIP</div>
           </div>
 
         </div>
       </div>
+
+      {isPopupVisible && isWin === true && (
+        <WinPopup winAmount={betAmount} onClose={() => setIsPopupVisible(false)} onRetry={() => handleFlip()} />
+      )}
+      {isPopupVisible && isWin === false && (
+        <LosePopup onClose={() => setIsPopupVisible(false)} onRetry={() => handleFlip()} />
+      )}
+      {isMessagePopupVisible &&
+        <MessagePopup message={"Please select a bet amount and a side (TON or UTYA)!"} onClose={() => setIsMessagePopupVisible(false)} />
+      }
     </div>
   );
 }

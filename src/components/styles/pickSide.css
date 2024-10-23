@@ -1,0 +1,52 @@
+.pick-side-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .pick-side-ton {
+    background-image: url("../../assets/images/coin-side.png");
+    background-size: cover;
+    width: 160px;
+    height: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-family: "Hobeaux Bold", sans-serif;
+    letter-spacing: 0px;
+    color: white;
+    cursor: pointer;
+  }
+
+  .pick-side-ton:active {
+    transform: translateY(2px);
+  }
+
+  .pick-side-ton.selected {
+    background-image: url("../../assets/images/ton-button-background.png");
+  }
+  
+  .pick-side-utya {
+    background-image: url("../../assets/images/coin-side.png");
+    background-size: cover;
+    width: 160px;
+    height: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-family: "Hobeaux Bold", sans-serif;
+    letter-spacing: 0px;
+    color: white;
+    cursor: pointer;
+  }
+
+  .pick-side-utya:active {
+    transform: translateY(2px);
+  }
+
+  .pick-side-utya.selected {
+    background-image: url("../../assets/images/utya-button-background.png");
+  }

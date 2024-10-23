@@ -1,0 +1,67 @@
+.header-row {
+  display: flex;
+  padding: 12px;
+  flex-direction: row;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.profile-name {
+  width: 160px;
+  height: 56px;
+  position: relative;
+}
+
+.deposit-amount {
+    width: 160px;
+    height: 56px;
+    position: relative;
+}
+
+.deposit-field {
+  width: 160px;
+  height: 56px;
+  position: relative;
+}
+
+.profile-username-text, .profile-deposit-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  font-family: "Hobeaux Bold", sans-serif;
+  letter-spacing: 0px;
+  color: #833B1C;
+}
+
+.profile-username-text {
+  position: absolute;
+  display: inline-block;
+  top: 11px;
+  left: 46px;
+  width: 114px;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+}
+
+.profile-deposit-text {
+    position: absolute;
+    display: inline-block;
+    top: 12px;
+    left: 46px;
+    width: 84px;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    text-align: center;
+}
+
+.button-deposit {
+  position: absolute;
+  display: inline-block;
+  top: 0;
+  right: 0;
+  width: 50px;
+  height: 50px;
+}

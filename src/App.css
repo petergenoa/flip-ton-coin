@@ -28,108 +28,19 @@ body {
   background-position: center;
 }
 
-.header-row {
-  display: flex;
-  padding: 12px;
-  flex-direction: row;
-  justify-content: space-between;
-  box-sizing: border-box;
-}
-
-.profile-name {
-  width: 150px;
-  height: 50px;
-  background-size: cover;
-  background-image: url("./assets/images/profile.png");
-}
-
-.deposit-field {
-  width: 150px;
-  height: 50px;
-  background-size: cover;
-  background-image: url("./assets/images/deposit.png");
-  position: relative;
-}
-
-.profile-username-text, .profile-deposit-text {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 40px;
-  font-family: "Hobeaux Bold", sans-serif;
-  letter-spacing: 0px;
-  color: #833B1C;
-}
-
-.button-deposit {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 50px;
-  height: 50px;
-}
-
-.bet-row {
-  margin-top: 20px;
-}
-
-.bet-title {
-  font-family: "Hobeaux Bold", sans-serif;
-  letter-spacing: 0px;
-  color: #FEDF61;
-  font-size: 54px;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.bet-container {
-  display: flex;
-  justify-content: space-between;
-  padding: 6px;
-}
-
-.bet-container .bet-item {
-  width: 88px;
-  height: 80px;
-  background-size: cover;
-  background-image: url("./assets/images/background-bet.png");
-}
-
-.bet-item-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
-  justify-content: center;
-  gap: 6px;
-}
-
-.bet-container img {
-  width: 40px;
-}
-
-.bet-container p {
-  font-size: 24px;
-  font-family: "Hobeaux Bold", sans-serif;
-  letter-spacing: 0px;
-  color: #FEDF61;
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
 .coin-container {
   display: block;
   margin: 0 auto;
   margin-top: 40px;
-  width: 300px;
-  height: 300px;
+  width: 200px;
+  height: 200px;
   perspective: 1000px; /* This gives a 3D perspective */
 }
 
 .coin {
   position: relative;
-  width: 300px;
-  height: 300px;
+  width: 200px;
+  height: 200px;
   transform-style: preserve-3d;
   animation: flip 3s infinite ease-in-out;
 }
@@ -143,7 +54,6 @@ body {
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  overflow: hidden; /* Makes sure the coin is round */
 }
 
 .front {
@@ -157,8 +67,7 @@ body {
 img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Ensures images fit perfectly inside */
-  border-radius: 50%;
+  object-fit: cover;
 }
 
 /* Keyframes for the flip animation */
@@ -174,42 +83,6 @@ img {
   }
 }
 
-
-.pick-side-button {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-
-.pick-side-ton {
-  background-image: url("./assets/images/ton-button-background.png");
-  background-size: cover;
-  width: 160px;
-  height: 52px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 24px;
-  font-family: "Hobeaux Bold", sans-serif;
-  letter-spacing: 0px;
-  color: white;
-}
-
-.pick-side-utya {
-  background-image: url("./assets/images/utya-button-background.png");
-  background-size: cover;
-  width: 160px;
-  height: 52px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 24px;
-  font-family: "Hobeaux Bold", sans-serif;
-  letter-spacing: 0px;
-  color: white;
-}
-
 .bet-button-container {
   display: flex;
   justify-content: center;
@@ -220,8 +93,8 @@ img {
 .bet-button {
   background-image: url("./assets/images/background-flip.png");
   background-size: cover;
-  width: 360px;
-  height: 72px;
+  width: 340px;
+  height: 68px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -229,4 +102,12 @@ img {
   font-family: "Hobeaux Bold", sans-serif;
   letter-spacing: 0px;
   color: white;
+  -webkit-box-shadow:0px 0px 21px 7px rgba(255,137,46,0.9);
+  -moz-box-shadow: 0px 0px 21px 7px rgba(255,137,46,0.9);
+  box-shadow: 0px 0px 21px 7px rgba(255,137,46,0.9);
+  border-radius: 50px;
+}
+
+.bet-button:active {
+  transform: translateY(4px);
 }
