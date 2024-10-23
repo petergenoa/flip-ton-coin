@@ -8,11 +8,12 @@ import Header from "./components/Header";
 import BetAmount from "./components/BetAmount";
 import Coin from "./components/Coin";
 import PickSide from "./components/PickSide";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import WinPopup from "./components/partials/WinPopup";
 import LosePopup from "./components/partials/LosePopup";
-import ButtonSound from "./assets/sounds/button.m4a";
 import MessagePopup from "./components/partials/MessagePopup";
+import WinSound from "./assets/sounds/win.m4a";
+import LostSound from "./assets/sounds/lost.m4a";
 
 declare global {
   interface Window {
@@ -20,7 +21,6 @@ declare global {
       webkitAudioContext: any;
   }
 }
-
 
 function App() {
   const { network } = useTonConnect();
@@ -32,6 +32,11 @@ function App() {
   const [isMessagePopupVisible, setIsMessagePopupVisible] = useState(false);
   const [isWin, setIsWin] = useState<boolean | null>(null);
 
+  const [audioBuffer, setAudioBuffer] = useState<AudioBuffer | null>(null);
+  const [audioContext] = useState(() => new (window.AudioContext || window.webkitAudioContext)());
+  const [audioWinBuffer, setAudioWinBuffer] = useState<AudioBuffer | null>(null);
+  const [audioWinContext] = useState(() => new (window.AudioContext || window.webkitAudioContext)());
+
   if(window.Telegram) {
     const tg = window.Telegram.WebApp;
     if (tg) {
@@ -39,12 +44,47 @@ function App() {
       tg.expand();
     }
   }
+
+  useEffect(() => {
+    const fetchAudio = async () => {
+        const response = await fetch(LostSound);
+        const arrayBuffer = await response.arrayBuffer();
+        const decodedData = await audioContext.decodeAudioData(arrayBuffer);
+        setAudioBuffer(decodedData);
+    };
+
+    fetchAudio();
+  }, [audioContext]);
   
-  const playSound = () => {
-    const audio = new Audio(ButtonSound);
-    audio.play();
-  }
+  const playLostSound = () => {
+    if (audioBuffer) {
+      const source = audioContext.createBufferSource();
+      source.buffer = audioBuffer;
+      source.connect(audioContext.destination);
+      source.start(0);
+    }
+  };
+
+  useEffect(() => {
+    const fetchWinAudio = async () => {
+        const response = await fetch(WinSound);
+        const arrayBuffer = await response.arrayBuffer();
+        const decodedData = await audioWinContext.decodeAudioData(arrayBuffer);
+        setAudioWinBuffer(decodedData);
+    };
+
+    fetchWinAudio();
+  }, [audioWinContext]);
   
+  const playWinSound = () => {
+    if (audioWinBuffer) {
+      const source = audioWinContext.createBufferSource();
+      source.buffer = audioWinBuffer;
+      source.connect(audioWinContext.destination);
+      source.start(0);
+    }
+  };
+
   const handleFlip = () => {
     window.Telegram.WebApp.HapticFeedback.impactOccurred("heavy");
     if (!betAmount || !selectedSide) {
@@ -61,16 +101,15 @@ function App() {
       const userChoice = selectedSide === 'TON' ? 'TON' : 'UTYA';
       
       if (result === userChoice) {
-        // User wins
+        playWinSound();
         setIsWin(true);
         setBalance(balance + betAmount);
       } else {
-        // User loses
+        playLostSound();
         setIsWin(false);
         setBalance(balance - betAmount);
       }
 
-      // Show the popup after the "draw animation"
       setIsPopupVisible(true);
     }, 500);
   };

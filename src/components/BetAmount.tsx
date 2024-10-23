@@ -11,28 +11,27 @@ const BetAmount: React.FC<BetAmountProps> = ({ setBetAmount }) => {
     const [selectedItem, setSelectedItem] = useState<number>(0);
     
     const [audioBuffer, setAudioBuffer] = useState<AudioBuffer | null>(null);
-      const [audioContext] = useState(() => new (window.AudioContext || window.webkitAudioContext)());
+    const [audioContext] = useState(() => new (window.AudioContext || window.webkitAudioContext)());
 
+    useEffect(() => {
+    const fetchAudio = async () => {
+        const response = await fetch(ButtonSound);
+        const arrayBuffer = await response.arrayBuffer();
+        const decodedData = await audioContext.decodeAudioData(arrayBuffer);
+        setAudioBuffer(decodedData);
+    };
 
-      useEffect(() => {
-        const fetchAudio = async () => {
-          const response = await fetch(ButtonSound);
-          const arrayBuffer = await response.arrayBuffer();
-          const decodedData = await audioContext.decodeAudioData(arrayBuffer);
-          setAudioBuffer(decodedData);
-        };
+    fetchAudio();
+    }, [audioContext]);
     
-        fetchAudio();
-      }, [audioContext]);
-    
-      const playSound = () => {
+    const playSound = () => {
         if (audioBuffer) {
-          const source = audioContext.createBufferSource();
-          source.buffer = audioBuffer;
-          source.connect(audioContext.destination);
-          source.start(0);
+            const source = audioContext.createBufferSource();
+            source.buffer = audioBuffer;
+            source.connect(audioContext.destination);
+            source.start(0);
         }
-      };
+    };
 
     const handleSelectItem = (amount: number) => {
         playSound();

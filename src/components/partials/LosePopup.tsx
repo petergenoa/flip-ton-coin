@@ -4,7 +4,6 @@ import ButtonBackground from '../../assets/images/popups/button-background.png';
 import AmountBackground from '../../assets/images/popups/amount-background.png';
 import TonImage from '../../assets/images/popups/small-ton-side.png';
 import Fireworks from "react-canvas-confetti/dist/presets/snow";
-import LostSound from "../../assets/sounds/lost.wav";
 import ButtonSound from "../../assets/sounds/button.m4a";
 import Header from '../Header';
 
@@ -16,10 +15,6 @@ interface LosePopupProps {
 }
 
 const LosePopup: React.FC<LosePopupProps> = ({ amount, username, onClose, onRetry }) => {
-  useEffect(() => {
-    const audio = new Audio(LostSound);
-    audio.play();
-  }, []);
   
   const playSound = () => {
     const audio = new Audio(ButtonSound);

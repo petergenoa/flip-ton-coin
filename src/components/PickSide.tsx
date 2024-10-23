@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./styles/pickSide.css";
 import ButtonSound from "../assets/sounds/button.m4a";
 
@@ -9,10 +9,28 @@ interface PickSideProps {
 const PickSide: React.FC<PickSideProps> = ({ setSelectedSide }) => {
     const [selectedSide, setLocalSelectedSide] = useState('');
 
+    const [audioBuffer, setAudioBuffer] = useState<AudioBuffer | null>(null);
+    const [audioContext] = useState(() => new (window.AudioContext || window.webkitAudioContext)());
+
+    useEffect(() => {
+        const fetchAudio = async () => {
+            const response = await fetch(ButtonSound);
+            const arrayBuffer = await response.arrayBuffer();
+            const decodedData = await audioContext.decodeAudioData(arrayBuffer);
+            setAudioBuffer(decodedData);
+        };
+
+        fetchAudio();
+    }, [audioContext]);
+        
     const playSound = () => {
-        const audio = new Audio(ButtonSound);
-        audio.play();
-    }
+        if (audioBuffer) {
+            const source = audioContext.createBufferSource();
+            source.buffer = audioBuffer;
+            source.connect(audioContext.destination);
+            source.start(0);
+        }
+    };
 
     const handleTonClick = () => {
         playSound();

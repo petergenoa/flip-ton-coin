@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './styles/winPopup.css';
 import ButtonBackground from '../../assets/images/popups/button-background.png';
 import AmountBackground from '../../assets/images/popups/amount-background.png';
 import TonImage from '../../assets/images/popups/small-ton-side.png';
 import Fireworks from "react-canvas-confetti/dist/presets/explosion";
-import WinSound from "../../assets/sounds/win3.wav";
 import ButtonSound from "../../assets/sounds/button.m4a";
 import Header from '../Header';
 
@@ -17,21 +16,37 @@ interface WinPopupProps {
 }
 
 const WinPopup: React.FC<WinPopupProps> = ({ username, amount, winAmount, onClose, onRetry }) => {
-  useEffect(() => {
-    const audio = new Audio(WinSound);
-    audio.play();
-  }, []);
+  const [audioBuffer, setAudioBuffer] = useState<AudioBuffer | null>(null);
+  const [audioContext] = useState(() => new (window.AudioContext || window.webkitAudioContext)());
 
+  useEffect(() => {
+    const fetchAudio = async () => {
+        const response = await fetch(ButtonSound);
+        const arrayBuffer = await response.arrayBuffer();
+        const decodedData = await audioContext.decodeAudioData(arrayBuffer);
+        setAudioBuffer(decodedData);
+    };
+
+    fetchAudio();
+  }, [audioContext]);
+  
   const playSound = () => {
-    const audio = new Audio(ButtonSound);
-    audio.play();
+    if (audioBuffer) {
+      const source = audioContext.createBufferSource();
+      source.buffer = audioBuffer;
+      source.connect(audioContext.destination);
+      source.start(0);
+    }
+  };
+
+  const playSoundRetry = () => {
+    playSound();
     window.Telegram.WebApp.HapticFeedback.impactOccurred("heavy");
     onRetry();
   }
 
   const playSoundClose = () => {
-    const audio = new Audio(ButtonSound);
-    audio.play();
+    playSound();
     window.Telegram.WebApp.HapticFeedback.impactOccurred("heavy");
     onClose();
   }
@@ -53,7 +68,7 @@ const WinPopup: React.FC<WinPopupProps> = ({ username, amount, winAmount, onClos
               <img src={ButtonBackground} alt="" />
               <div className='button-title'>Home</div>
             </div>
-            <div className='popup-button' onClick={playSound}>
+            <div className='popup-button' onClick={playSoundRetry}>
               <img src={ButtonBackground} alt="" />
               <div className='button-title'>Retry</div>
             </div>
