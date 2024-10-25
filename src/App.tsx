@@ -15,6 +15,7 @@ import MessagePopup from "./components/partials/MessagePopup";
 import WinSound from "./assets/sounds/win.m4a";
 import LostSound from "./assets/sounds/lost.m4a";
 import BackgroundLeaderboard from "./assets/images/popups/background.png";
+import MatchingPopup from "./components/partials/MatchingPopup";
 
 declare global {
   interface Window {
@@ -32,6 +33,7 @@ function App() {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [isMessagePopupVisible, setIsMessagePopupVisible] = useState(false);
   const [isWin, setIsWin] = useState<boolean | null>(null);
+  const [isMatchingVisible, setIsMatchingVisible] = useState(false);
 
   const [audioBuffer, setAudioBuffer] = useState<AudioBuffer | null>(null);
   const [audioContext] = useState(() => new (window.AudioContext || window.webkitAudioContext)());
@@ -96,7 +98,9 @@ function App() {
     // Close popup first to simulate draw animation
     setIsPopupVisible(false);
     // Simulate draw animation and delay
+    setIsMatchingVisible(true);
     setTimeout(() => {
+      setIsMatchingVisible(false);
       // Simulate coin flip (randomly select 'TON' or 'UTYA')
       const result = Math.random() < 0.5 ? 'TON' : 'UTYA';
       const userChoice = selectedSide === 'TON' ? 'TON' : 'UTYA';
@@ -110,9 +114,9 @@ function App() {
         setIsWin(false);
         setBalance(balance - betAmount);
       }
-
+      
       setIsPopupVisible(true);
-    }, 500);
+    }, 3000);
   };
 
   return (
@@ -140,6 +144,9 @@ function App() {
           </div>
         </div>
       </div>
+      {isMatchingVisible &&
+        <MatchingPopup />
+      }
 
       {isPopupVisible && isWin === true && (
         <WinPopup amount={balance} username={username} winAmount={betAmount} onClose={() => setIsPopupVisible(false)} onRetry={() => handleFlip()} />

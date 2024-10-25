@@ -44,7 +44,7 @@ html, body, #root {
   margin-top: 40px;
   width: 200px;
   height: 200px;
-  perspective: 1000px; /* This gives a 3D perspective */
+  perspective: 1000px;
 }
 
 .coin {
