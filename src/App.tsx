@@ -14,6 +14,7 @@ import LosePopup from "./components/partials/LosePopup";
 import MessagePopup from "./components/partials/MessagePopup";
 import WinSound from "./assets/sounds/win.m4a";
 import LostSound from "./assets/sounds/lost.m4a";
+import BackgroundLeaderboard from "./assets/images/popups/background.png";
 
 declare global {
   interface Window {
@@ -127,6 +128,16 @@ function App() {
             <div className="bet-button" onClick={handleFlip}>FLIP</div>
           </div>
 
+          <div className="leaderboard">
+            <img src={BackgroundLeaderboard} alt="laeaderboard" />
+            <div className="leaderboard-title">Leaderboard</div>
+            <div className="leaderboard-info">
+              <div>1. Username 1<span>350</span></div>
+              <div>2. Username 2<span>300</span></div>
+              <div>3. Username 3<span>250</span></div>
+              <div>4. Username 4<span>200</span></div>
+            </div>
+          </div>
         </div>
       </div>
 

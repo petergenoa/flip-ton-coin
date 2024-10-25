@@ -108,7 +108,7 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 24px;
+  font-size: 34px;
   font-family: "Hobeaux Bold", sans-serif;
   letter-spacing: 0px;
   color: white;
@@ -116,10 +116,48 @@ img {
   -moz-box-shadow: 0px 0px 21px 7px rgba(255,137,46,0.9);
   box-shadow: 0px 0px 21px 7px rgba(255,137,46,0.9);
   border-radius: 50px;
-  position: absolute;
-  bottom: 20px;
 }
 
 .bet-button:active {
   transform: translateY(4px);
+}
+
+.leaderboard {
+  width: 340px;
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.leaderboard-title {
+  font-size: 24px;
+  font-family: "Hobeaux Bold", sans-serif;
+  letter-spacing: 0px;
+  color: white;
+  position: absolute;
+  top: 0;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+}
+
+.leaderboard-info {
+  font-size: 18px;
+  font-family: "Hobeaux Bold", sans-serif;
+  letter-spacing: 0px;
+  color: white;
+  position: absolute;
+  top: 58px;
+  left: 30px;
+  width: 280px;
+  
+}
+
+.leaderboard-info div {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
 }
